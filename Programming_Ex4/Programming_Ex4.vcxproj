@@ -114,6 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Matrix2d.h" />
+    <ClInclude Include="Matrix3d.h" />
     <ClInclude Include="nDimMatrix.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

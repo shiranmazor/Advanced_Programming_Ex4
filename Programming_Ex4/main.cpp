@@ -1,4 +1,5 @@
 #include "Matrix2d.h"
+#include "Matrix3d.h"
 
 template<typename Groups>
 void print(const Groups& all_groups) {
@@ -18,9 +19,15 @@ void print(const Groups& all_groups) {
 }
 
 int main() {
-	Matrix2d<char> m = { { 'a', 'A', 'a' },{ 'B', 'a', 'B' },{ 'B', 'a', 'B' } };
+	Matrix2d<char> m = { { 'a', 'A', 'a' },{ 'B', 'a', 'B'},{ 'B', 'a', 'B' } };
+	//m.print();
 	auto all_groups = m.groupValues([](auto i) {return islower(i) ? "L" : "U"; });
 	print(all_groups);
+
+	Matrix3d<int> m2 = { { { 1, 2, 3 },{ 1, 2 },{ 1, 2 } },{ { 1, 2 },{ 1, 2, 3, 4 } } };
+	//m2.print();
+	auto groups = m2.groupValues([](auto i) {return i % 3 ? "!x3" : "x3"; });
+	print(groups);
 
 	return 0;
 }
