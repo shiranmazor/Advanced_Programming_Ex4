@@ -13,6 +13,7 @@ template<class T>
 class Matrix3d
 {
 private:
+	// Recursivley collect all adjacent cells with the same Func result
 	template<class Func>
 	void _collect_cells(int z, int i, int j, set<array<int, 3>>* s, Func func) const
 	{
