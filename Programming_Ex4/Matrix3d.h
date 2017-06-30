@@ -14,7 +14,7 @@ class Matrix3d
 {
 private:
 	template<class Func>
-	void _collect_cells(int z, int i, int j, set<array<int, 3>>* s, Func func)
+	void _collect_cells(int z, int i, int j, set<array<int, 3>>* s, Func func) const
 	{
 		T curr = matrix[z][i][j];
 		s->insert({ z, i, j });
@@ -36,10 +36,11 @@ public:
 	size_t d2_size;
 	size_t d3_size;
 
+	Matrix3d() : matrix(vector<vector<vector<T>>>()), d1_size(0), d2_size(0), d3_size(0) {}
+
 	Matrix3d(initializer_list<initializer_list<initializer_list<T>>> init)
 	{
 		d3_size = init.size();
-		//matrix = vector<vector<vector<T>>>(d3_size);
 		matrix = vector<vector<vector<T>>>();
 		for (auto list2d : init)
 		{
@@ -64,7 +65,7 @@ public:
 	~Matrix3d() {}
 
 	template<class Func, class Group = typename result_of<Func(T)>::type>
-	unordered_map<Group, vector<vector<array<int, 3>>>> groupValues(Func func)
+	unordered_map<Group, vector<vector<array<int, 3>>>> groupValues(Func func) const
 	{
 		set<array<int, 3>> collected_cells = {};
 		set<array<int, 3>> group = {};
@@ -105,19 +106,4 @@ public:
 
 		return result;
 	}
-
-	//void print()
-	//{
-	//	for (int z = 0; z < d3_size; z++)
-	//	{	
-	//		cout << z << endl;
-	//		for (int i = 0; i < d2_size; i++)
-	//		{
-	//			for (int j = 0; j < d1_size; j++)
-	//				cout << matrix[z][i][j] << "|";
-	//			cout << endl;
-	//		}
-	//		cout << endl << endl;
-	//	}
-	//}
 };

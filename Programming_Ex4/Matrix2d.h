@@ -14,7 +14,7 @@ class Matrix2d
 {
 private:
 	template<class Func>
-	void _collect_cells(int i, int j, set<array<int, 2>>* s, Func func)
+	void _collect_cells(int i, int j, set<array<int, 2>>* s, Func func) const
 	{
 		T curr = matrix[i][j];
 		s->insert({ i, j });
@@ -30,6 +30,8 @@ public:
 	vector<vector<T>> matrix;
 	size_t d1_size;
 	size_t d2_size;
+
+	Matrix2d() : matrix(vector<vector<T>>()), d1_size(0), d2_size(0) {}
 
 	Matrix2d(initializer_list<initializer_list<T>> init)
 	{
@@ -48,7 +50,7 @@ public:
 	~Matrix2d() {}
 
 	template<class Func, class Group = typename result_of<Func(T)>::type>
-	unordered_map<Group, vector<vector<array<int, 2>>>> groupValues(Func func)
+	unordered_map<Group, vector<vector<array<int, 2>>>> groupValues(Func func) const
 	{
 		set<array<int, 2>> collected_cells = {};
 		set<array<int, 2>> group = {};
@@ -86,14 +88,4 @@ public:
 
 		return result;
 	}
-
-	//void print()
-	//{
-	//	for (int i = 0; i < d2_size; i++)
-	//	{
-	//		for (int j = 0; j < d1_size; j++)
-	//			cout << matrix[i][j] << "|";
-	//		cout << endl;
-	//	}
-	//}
 };
